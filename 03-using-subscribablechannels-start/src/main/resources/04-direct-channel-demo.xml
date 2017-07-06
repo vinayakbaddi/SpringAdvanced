@@ -7,7 +7,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-
+<task:executor id="te" pool-size="3-5" queue-capacity="20"/> 
+ 
+ <int:channel id="orderschannel"  >   <int:dispatcher  task-executor="te"/>
+   </int:channel>  
+ 
 	
 	<int:publish-subscribe-channel id="orderschannel" />
 		
@@ -17,7 +21,8 @@
 				 
 	<int:service-activator input-channel="orderschannel"
 						 ref="myprocessor" method="doProcess"  />
- 
+<!--  <int:channel id="orderschannel"  >   <int:dispatcher load-balancer="none"/> 
+  </int:channel>  -->
   	<bean id="orderProcessServiceImpl" 
   		class="com.way2learnonline.service.OrderProcessServiceImpl" />
  

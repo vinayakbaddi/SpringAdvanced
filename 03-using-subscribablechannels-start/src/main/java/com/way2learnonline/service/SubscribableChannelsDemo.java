@@ -30,7 +30,7 @@ public class SubscribableChannelsDemo {
 		
 		messageChannel.send(orderMessage);
 		System.out.println("Sent 1");
-		/*messageChannel.send(orderMessage);
+		messageChannel.send(orderMessage);
 		System.out.println("Sent 2");
 		messageChannel.send(orderMessage);
 		System.out.println("Sent 3");
@@ -38,7 +38,7 @@ public class SubscribableChannelsDemo {
 		System.out.println("Sent 4");
 		
 		messageChannel.send(orderMessage);
-		System.out.println("Sent 5");*/
+		System.out.println("Sent 5");
 	
 		
 	}

@@ -8,12 +8,15 @@
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
 	<int:service-activator input-channel="orderschannel"
-				 ref="orderProcessServiceImpl" method="processOrder"  >
+				 ref="orderProcessServiceImpl" method="processOrder" order="5"  >
 				 
-		<int:poller fixed-rate="1000" />		 
+		<!-- <int:poller fixed-rate="1000" />	 -->	 
 	</int:service-activator>
-				 
-		
+				 <int:service-activator input-channel="orderschannel"     
+				    ref="myprocessor" method="doProcess" order="1" /> 
+	  <int:channel id="orderschannel"  >   
+	  <int:dispatcher failover="false" /> 
+	   </int:channel> 	
   	<bean id="orderProcessServiceImpl" 
   		class="com.way2learnonline.service.OrderProcessServiceImpl" />
  

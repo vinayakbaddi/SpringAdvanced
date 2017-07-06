@@ -14,10 +14,10 @@
 		
 
 	<int:service-activator input-channel="orderschannel"
-				 ref="orderProcessServiceImpl" method="processOrder"  />
+				 ref="orderProcessServiceImpl" method="processOrder" order="10"  />
 				 
 	<int:service-activator input-channel="orderschannel"
-						 ref="myprocessor" method="doProcess"  />
+						 ref="myprocessor" method="doProcess" order="1" />
  
   	<bean id="orderProcessServiceImpl" 
   		class="com.way2learnonline.service.OrderProcessServiceImpl" />

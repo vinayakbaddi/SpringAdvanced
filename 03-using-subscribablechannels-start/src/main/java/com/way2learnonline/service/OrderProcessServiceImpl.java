@@ -34,9 +34,9 @@ public class OrderProcessServiceImpl   {
 		
 		// TODO -1 uncomment the below code to throw an exception
 		
-		/*if(true){
+		if(true){
 			throw new RuntimeException("Just for testing");
-		}	*/
+		}	
 		
 		
 		
