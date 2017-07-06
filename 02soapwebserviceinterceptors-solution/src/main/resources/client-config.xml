@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:web-services="http://www.springframework.org/schema/web-services"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services.xsd">
+	
+	<bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<property name="defaultUri" 
+		 value="http://localhost:8080/02soapwebserviceinterceptors-solution/ws" />
+		<property name="marshaller" ref="jaxb2Marshaller" />
+		<property name="unmarshaller" ref="jaxb2Marshaller" />
+	</bean> 
+	
+	 <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+ 		<property name="packagesToScan">
+ 			<list>
+ 				<value>com.way2learnonline.domain</value>
+ 			</list>
+ 		</property>
+ 	</bean>
+
+</beans>

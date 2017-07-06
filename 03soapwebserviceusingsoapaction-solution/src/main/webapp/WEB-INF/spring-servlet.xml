@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:sws="http://www.springframework.org/schema/web-services"
+	xsi:schemaLocation="http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	  
+	<context:component-scan base-package="com.way2learnonline" />
+	
+		<sws:interceptors>
+		
+		 <bean class="org.springframework.ws.soap.server.endpoint.interceptor.SoapEnvelopeLoggingInterceptor" />  
+	</sws:interceptors>
+	
+		  
+	<sws:annotation-driven marshaller="jaxb2Marshaller" unmarshaller="jaxb2Marshaller"    />  	
+ 	
+	 <sws:dynamic-wsdl id="orderProcess"   portTypeName="OrderProcess"  locationUri="/ws"
+	   					 targetNamespace="http://way2learnonline.com">  	                               
+	  		<sws:xsd location="classpath:orderprocess.xsd"/>                                                  
+	</sws:dynamic-wsdl> 	
+	
+	
+	<bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+	  		<property name="packagesToScan">
+ 			<list>
+ 				<value>com.way2learnonline.domain</value>
+ 			</list>
+ 		</property>		
+ 	</bean> 	
+	
+	
+
+</beans>

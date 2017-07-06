@@ -1,0 +1,2 @@
+//com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/integration\:/07-webservice-outbound-gateway-start/src/main/resources/webservice-outbound-gateway.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<graph>\r\n<element clazz\="ChannelModelElement" type\="channel">\r\n<structure end\="1010" endstart\="1010" start\="974" startend\="1010"/>\r\n<bounds height\="118" width\="120" x\="19" y\="17"/>\r\n</element>\r\n</graph>
+eclipse.preferences.version=1

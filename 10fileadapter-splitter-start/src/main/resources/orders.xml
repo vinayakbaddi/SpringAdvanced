@@ -1,0 +1,16 @@
+<orders>
+  <order>
+	<customerID>1</customerID>
+	<itemID>2</itemID>
+	<qty>3</qty>
+	<price>4</price>
+</order>
+
+  <order>
+	<customerID>5</customerID>
+	<itemID>6</itemID>
+	<qty>7</qty>
+	<price>8</price>
+</order>
+</orders>
+

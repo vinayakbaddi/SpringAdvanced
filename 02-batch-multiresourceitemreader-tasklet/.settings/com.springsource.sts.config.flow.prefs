@@ -1,0 +1,2 @@
+//com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/batch\:/02-batch-multiresourceitemreader-tasklet/src/main/resources/spring/batch/jobs/job-read-files.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<graph>\r\n<element clazz\="JobModelElement" type\="job">\r\n<structure end\="1089" endstart\="1083" start\="726" startend\="805"/>\r\n<bounds height\="168" width\="148" x\="15" y\="17"/>\r\n</element>\r\n</graph>
+eclipse.preferences.version=1

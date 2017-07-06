@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		 targetNamespace="http://domain.way2learnonline.com"
+		  xmlns:tns="http://domain.way2learnonline.com" elementFormDefault="qualified">
+
+			<element name="processOrderRequest" >
+				<complexType>
+					<sequence>
+						<element name="order"  type="tns:Order"/>
+					</sequence>	
+				</complexType>
+			</element>
+			<element name="processOrderResponse" >
+					<complexType >
+						<sequence>
+							<element name="orderId"  type="string"/>
+						</sequence>	
+					</complexType>
+			</element>	
+	
+	
+	
+	<element name="cancelOrderRequest">
+		<complexType >
+			<sequence>
+				<element name="orderId" type="string" />
+			</sequence>	
+		</complexType>
+	</element>
+	<element name="cancelOrderResponse">
+		<complexType >
+			<sequence>
+				<element name="isCancelled" type="boolean" />
+			</sequence>	
+		</complexType>
+	</element>		
+	
+	
+	<element name="getAllOrdersRequest" >
+		<complexType >	
+		</complexType>
+	</element>
+	<element name="getAllOrdersResponse">
+		<complexType >
+			<sequence>
+				<element name="orders" type="tns:Order" minOccurs="0" maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>	
+	
+	<complexType name="Order">
+		<sequence>
+			<element name="customerID" type="string"/>
+			<element name="itemID" type="string"/>
+			<element name="qty" type="integer"/>
+			<element name="price" type="double"/>
+		</sequence>
+	</complexType>
+
+</schema>

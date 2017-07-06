@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+
+	<task:executor id="te" pool-size="3-5" queue-capacity="20"/>
+
+	<int:channel id="orderschannel"  >
+		<int:dispatcher  task-executor="te"/>
+	</int:channel>
+	
+<!-- 	<int:channel id="orderschannel"  >
+		<int:dispatcher failover="false" load-balancer="none"/>
+	</int:channel> -->
+		
+
+	<int:service-activator input-channel="orderschannel"
+				 ref="orderProcessServiceImpl" method="processOrder"  />
+				 
+	<int:service-activator input-channel="orderschannel"
+						 ref="myprocessor" method="doProcess"  />
+ 
+  	<bean id="orderProcessServiceImpl" 
+  		class="com.way2learnonline.service.OrderProcessServiceImpl" />
+ 
+	<bean id="myprocessor" class="com.way2learnonline.service.Myprocessor" />
+
+</beans>

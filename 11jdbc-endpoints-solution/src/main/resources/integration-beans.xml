@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int-file="http://www.springframework.org/schema/integration/file"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.2.xsd
+		http://www.springframework.org/schema/integration/jdbc http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc-4.2.xsd
+		http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file-4.2.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.2.xsd">
+
+
+	<int-file:inbound-channel-adapter directory="c:/orders" channel="xmlorderschannel" >
+		<int:poller fixed-rate="10000" />
+	</int-file:inbound-channel-adapter>
+
+	<int:channel id="xmlorderschannel"/>
+	
+	<int-xml:xpath-splitter input-channel="xmlorderschannel" output-channel="xmlorderchannel">
+		<int-xml:xpath-expression expression="//order" />
+	</int-xml:xpath-splitter>
+	
+	<int:channel id="xmlorderchannel"/>
+	
+	<int-xml:unmarshalling-transformer input-channel="xmlorderchannel" 
+	 output-channel="orderschannel" unmarshaller="jaxb2marshaller" />
+	 
+	 <int:channel id="orderschannel"/>
+	 
+	 
+	 
+	  <int-jdbc:outbound-channel-adapter channel="orderschannel" 
+	 	data-source="ds"
+	 	 query="insert into orders(customerID,itemID,qty,price) values(:payload.customerID,
+	 	 :payload.itemID,:payload.qty,:payload.price)"/> 
+	 
+	 
+
+	 
+	 
+	 
+	
+	<oxm:jaxb2-marshaller id="jaxb2marshaller" context-path="com.way2learnonline.domain" />
+	
+	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.gjt.mm.mysql.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/way2learnonlinedb"/>
+		<property name="username" value="root"/>
+		<property name="password" value="root"/>
+		
+	</bean>  
+	 
+	
+</beans>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:int-ws="http://www.springframework.org/schema/integration/ws"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+	xsi:schemaLocation="http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm.xsd
+		http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws.xsd">
+
+
+<int:channel id="orders-channel"  />
+
+ <int-ws:outbound-gateway request-channel="orders-channel"
+  uri="http://localhost:8080/soapwebserviceinterceptors-solution/ws"
+ marshaller="jaxb2Marshaller" unmarshaller="jaxb2Marshaller"
+  reply-channel="orders-reply-channel" /> 
+  
+  <oxm:jaxb2-marshaller id="jaxb2Marshaller" context-path="com.way2learnonline.domain" />
+
+<int:channel id="orders-reply-channel" />
+
+<int-stream:stdout-channel-adapter channel="orders-reply-channel" append-newline="true"/>
+ 
+<!-- <int:inbound-channel-adapter ref="requestCreator" method="createRequest" channel="orders-channel"  >
+	<int:poller fixed-rate="5000"  />
+</int:inbound-channel-adapter>
+
+<bean id="requestCreator" class="com.way2learn.service.RequestCreator" /> 
+ -->
+</beans>
