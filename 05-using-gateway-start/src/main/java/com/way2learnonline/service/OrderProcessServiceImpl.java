@@ -33,7 +33,7 @@ public class OrderProcessServiceImpl   {
 		ordersMap.put(orderId, order);		
 		
 		
-		Thread.sleep(5000);	
+		Thread.sleep(2000);	
 		
 		
 		

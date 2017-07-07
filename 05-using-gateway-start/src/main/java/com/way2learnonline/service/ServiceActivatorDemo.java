@@ -21,7 +21,7 @@ public class ServiceActivatorDemo {
 		order.setQty(22);
 		
 		Message<Order> orderMessage= 
-				MessageBuilder.withPayload(order)
+				MessageBuilder.withPayload(order).setReplyChannelName("loggingChannel")
 							.build();
 		
 		MessageChannel messageChannel=

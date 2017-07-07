@@ -10,12 +10,15 @@
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
 
+	<int:channel id="loggingChannel"/>
+<int:logging-channel-adapter channel="loggingChannel" level="INFO">
+</int:logging-channel-adapter>
+ 
 	<int:channel id="orderschannel" />
-
 	<int:service-activator input-channel="orderschannel" 
+	output-channel="loggingChannel"
 				 ref="orderProcessServiceImpl"
  				method="processOrder" />
- 
   	<bean id="orderProcessServiceImpl" 
   		class="com.way2learnonline.service.OrderProcessServiceImpl" />
   		

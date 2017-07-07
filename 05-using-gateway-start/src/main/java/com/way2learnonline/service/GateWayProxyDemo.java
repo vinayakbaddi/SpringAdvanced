@@ -22,14 +22,16 @@ public class GateWayProxyDemo {
 		order.setQty(22);
 		
 		
-Message<Order> orderMessage= MessageBuilder.withPayload(order).setReplyChannelName("myrepluChannel").build();
+		//Message<Order> orderMessage= MessageBuilder.withPayload(order).setReplyChannelName("myreplyChannel").build();
 		
 		MessageChannel messageChannel=context.getBean("orderschannel",MessageChannel.class);
 		
-		messageChannel.send(orderMessage);
+		//messageChannel.send(orderMessage);
 		System.out.println("Sent 1");
 		
-		
+		OrderProcessService orderProcessService=context.getBean("ops",OrderProcessService.class);
+		String orderId=orderProcessService.xyzzzzz(order);  
+		System.out.println("Got Order Id : "+orderId); 
 		
 		/*OrderProcessService orderProcessService=context.getBean("orderProcessGateWay",OrderProcessService.class);
 		

@@ -6,6 +6,9 @@
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
 
 
+<int:gateway id="ops"
+	 service-interface="com.way2learnonline.service.OrderProcessService"
+	 default-request-channel="orderschannel"/>
 
 
 	<int:channel id="orderschannel" />
