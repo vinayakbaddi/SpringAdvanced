@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
+	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd
+		http://www.springframework.org/schema/integration/jdbc http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc-2.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-2.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:annotation-config />
+	
+	<util:properties id="jndienvironment" location="classpath:jndi.properties" />
+	
+	<jee:jndi-lookup id="cf" jndi-name="connectionFactory"  environment-ref="jndienvironment"/>
+	
+	<jee:jndi-lookup id="myq" jndi-name="MyQueue"  environment-ref="jndienvironment"/>
+
+	<!-- TODO -1 load jndi.properties into java.util.properties bean by uncommenting 
+		below line -->
+
+	<!-- <util:properties id="jndienv" location="classpath:jndi.properties" 
+		/> -->
+
+	<!-- TODO-2 configure connection factory as a bean by looking up jndi with 
+		jndi name as connectionFactory -->
+
+	<!-- <jee:jndi-lookup id="cf" jndi-name="connectionFactory" environment-ref="jndienv"/> -->
+
+	<!-- TODO-3 configure 2 queue beans by looking up jndi with name MyQueue and testq -->
+
+	<!-- <jee:jndi-lookup id="queue" jndi-name="MyQueue" environment-ref="jndienv"/> 
+	<jee:jndi-lookup id="tq" jndi-name="testq" environment-ref="jndienv"/> 
+	-->
+
+	<!-- TODO-4 Configure JMS Template bean . Inject the above connectionFactory 
+		into it. Inject the above queue as default Destination -->
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cf" />
+		<property name="defaultDestination" ref="queue" />
+
+	</bean>
+
+
+</beans>
